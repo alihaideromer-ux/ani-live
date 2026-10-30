@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1044,6 +1045,126 @@ a.top10-row:hover { background:rgb(var(--card)/.8); }
 #hero.ht-ready .hero-ht { opacity:1; }
 @media (prefers-reduced-motion:reduce) { .hero-ht { transition:none; } }
 </style>
+<style id="aniverse-title-page">
+.tp-hero { position:relative; overflow:hidden; }
+.tp-bg { position:absolute; inset:0; background:center / cover no-repeat; filter:blur(18px) saturate(1.15); transform:scale(1.15); opacity:.42; }
+.tp-scrim { position:absolute; inset:0; background:linear-gradient(to bottom, rgb(var(--bg) / .3), rgb(var(--bg))); }
+.tp-back { position:relative; z-index:2; display:flex; align-items:center; gap:.35rem; max-width:80rem; margin:0 auto; padding:.9rem 1rem 0; font-size:.82rem; color:rgb(var(--g300)); }
+.tp-back svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.tp-wrap { position:relative; z-index:1; max-width:80rem; margin:0 auto; padding:1rem 1rem 1.25rem; display:grid; gap:1rem; grid-template-columns:116px minmax(0,1fr); grid-template-areas:"poster head" "rest rest"; }
+.tp-poster { grid-area:poster; } .tp-head { grid-area:head; min-width:0; } .tp-rest { grid-area:rest; min-width:0; }
+.tp-poster img { display:block; width:100%; aspect-ratio:2 / 3; object-fit:cover; border-radius:12px; background:rgb(var(--card)); box-shadow:0 14px 40px rgba(0,0,0,.5); }
+.tp-title { font-size:1.2rem; font-weight:700; line-height:1.2; }
+.tp-jp { margin-top:.2rem; font-size:.78rem; color:rgb(var(--g400)); }
+.tp-chips { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.65rem; }
+.tp-chip { padding:.2rem .6rem; border-radius:99px; font-size:.72rem; background:rgb(var(--card) / .85); border:1px solid rgb(var(--line) / .12); color:rgb(var(--g300)); }
+.tp-chip.sc { color:rgb(var(--accent)); font-weight:600; }
+.tp-link:hover { border-color:rgb(var(--accent) / .6); color:rgb(var(--accent)); }
+.tp-cta { display:flex; flex-wrap:wrap; gap:.6rem; }
+.tp-btn { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; min-height:44px; padding:0 1.1rem; border-radius:99px; font-size:.85rem; font-weight:600; background:rgb(var(--card)); border:1px solid rgb(var(--line) / .16); color:rgb(var(--fg)); transition:transform .15s ease, border-color .15s ease; }
+.tp-btn:active { transform:scale(.96); }
+.tp-btn svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linejoin:round; }
+.tp-primary { background:rgb(var(--accent)); color:#07110a; border-color:transparent; }
+.tp-btn.on { border-color:rgb(var(--accent)); color:rgb(var(--accent)); }
+.tp-save.on svg { fill:currentColor; }
+.tp-syn { margin-top:1rem; line-height:1.65; font-size:.9rem; color:rgb(var(--g300)); display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+.tp-syn.open { display:block; }
+.tp-more { margin-top:.35rem; font-size:.8rem; font-weight:600; color:rgb(var(--accent)); }
+.tp-trailer { margin-top:1rem; aspect-ratio:16 / 9; border-radius:14px; overflow:hidden; background:#000; }
+.tp-trailer[hidden] { display:none; }
+.tp-trailer iframe { width:100%; height:100%; border:0; display:block; }
+.tp-body { max-width:80rem; margin:0 auto; padding:0 1rem 2.5rem; }
+.tp-h { font-weight:700; margin:1.5rem 0 .7rem; }
+.tp-meta { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:.6rem; }
+.tp-meta div { padding:.7rem .85rem; border-radius:12px; background:rgb(var(--panel)); border:1px solid rgb(var(--line) / .1); min-width:0; }
+.tp-meta dt { font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:rgb(var(--g400)); }
+.tp-meta dd { margin-top:.2rem; font-size:.88rem; overflow-wrap:anywhere; }
+@media (min-width:768px) {
+  .tp-wrap { grid-template-columns:240px minmax(0,1fr); gap:1.1rem 2rem; padding:2rem 1rem 2rem; grid-template-areas:"poster head" "poster rest"; align-items:start; }
+  .tp-title { font-size:2rem; } .tp-jp { font-size:.9rem; } .tp-chip { font-size:.78rem; }
+  .tp-syn { font-size:.95rem; -webkit-line-clamp:5; max-width:60rem; }
+  .tp-meta { grid-template-columns:repeat(4, minmax(0,1fr)); }
+}
+@media (prefers-reduced-motion:reduce) { .tp-btn { transition:none; } }
+</style>
+<style id="aniverse-title-tabs">
+.tp-tabs { position:relative; display:flex; gap:1.5rem; border-bottom:1px solid rgb(var(--line) / .14); margin-top:.25rem; overflow-x:auto; scrollbar-width:none; }
+.tp-tabs::-webkit-scrollbar { display:none; }
+.tp-tabs button { flex:0 0 auto; padding:.9rem 0 .8rem; font-size:.92rem; font-weight:600; color:rgb(var(--g400)); transition:color .2s ease; white-space:nowrap; }
+.tp-tabs button:hover, .tp-tabs button.on { color:rgb(var(--fg)); }
+.tp-ind { position:absolute; left:0; bottom:-1px; height:3px; width:0; border-radius:3px; background:rgb(var(--accent)); }
+.tp-ind.ready { transition:transform .32s cubic-bezier(.4,0,.2,1), width .32s cubic-bezier(.4,0,.2,1); }
+.tp-panel { padding-top:1rem; }
+.tp-panel[hidden] { display:none; }
+.tp-anim { animation:tpIn .4s cubic-bezier(.22,.8,.3,1) backwards; }
+.tp-eps.tp-anim { animation:none; }
+.tp-eps.tp-anim > * { animation:tpIn .42s cubic-bezier(.22,.8,.3,1) backwards; animation-delay:calc(var(--i, 0) * 32ms); }
+@keyframes tpIn { from { opacity:0; transform:translateX(-18px); } to { opacity:1; transform:none; } }
+.tp-seasons { margin-bottom:.9rem; }
+.tp-tools { display:flex; align-items:center; justify-content:space-between; gap:.75rem; margin-bottom:.8rem; }
+.tp-ranges { display:flex; gap:.4rem; overflow-x:auto; scrollbar-width:none; min-width:0; }
+.tp-ranges::-webkit-scrollbar { display:none; }
+.tp-ranges button { flex:0 0 auto; padding:.35rem .75rem; border-radius:99px; font-size:.75rem; font-weight:600; background:rgb(var(--card)); border:1px solid rgb(var(--line) / .12); color:rgb(var(--g300)); }
+.tp-ranges button.on { background:rgb(var(--accent)); color:#07110a; border-color:transparent; }
+.tp-evsw { flex:0 0 auto; margin-left:auto; }
+.tp-evsw button { padding:.3rem .6rem; }
+.tp-evsw svg { width:18px; height:18px; display:block; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.tp-list { display:flex; flex-direction:column; gap:.3rem; }
+.tp-ep { position:relative; text-align:left; width:100%; color:rgb(var(--fg)); border-radius:12px; transition:background .15s ease; }
+.tp-list .tp-ep { display:grid; grid-template-columns:1.7rem 7.2rem minmax(0,1fr); gap:.75rem; align-items:center; padding:.55rem .45rem; }
+.tp-ep:hover { background:rgb(var(--card) / .75); }
+.tp-ep.current { background:rgb(var(--accent) / .08); box-shadow:inset 0 0 0 1px rgb(var(--accent) / .4); }
+.tp-epn { font-size:1.1rem; font-weight:600; color:rgb(var(--g400)); text-align:center; }
+.tp-thumb { position:relative; display:block; aspect-ratio:16 / 9; border-radius:9px; overflow:hidden; background:center / cover no-repeat rgb(var(--card)); }
+.tp-thumb.ph { background-image:linear-gradient(135deg, rgb(var(--card2)), rgb(var(--card))); }
+.tp-thumb .pl { position:absolute; inset:0; display:grid; place-items:center; color:#fff; opacity:.55; transition:opacity .15s ease, background .15s ease; }
+.tp-ep:hover .tp-thumb .pl { opacity:1; background:rgba(0,0,0,.35); }
+.tp-thumb .pl svg { width:26px; height:26px; }
+.tp-ep.watched .tp-thumb { opacity:.6; }
+.tp-chk { position:absolute; top:5px; right:5px; width:19px; height:19px; border-radius:50%; background:rgb(var(--accent)); color:#07110a; display:grid; place-items:center; }
+.tp-chk svg { width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; }
+.tp-bar { position:absolute; left:0; right:0; bottom:0; height:3px; background:rgba(255,255,255,.28); }
+.tp-bar i { display:block; height:100%; background:rgb(var(--accent)); }
+.tp-ept { min-width:0; display:block; }
+.tp-ept b { display:block; font-size:.9rem; font-weight:600; line-height:1.3; overflow-wrap:anywhere; }
+.tp-ept small { display:block; margin-top:.15rem; font-size:.74rem; color:rgb(var(--g400)); }
+.tp-ept .tp-now { color:rgb(var(--accent)); font-weight:600; }
+.tp-ept em { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin-top:.3rem; font-style:normal; font-size:.78rem; line-height:1.45; color:rgb(var(--g400)); }
+.tp-grid.tp-eps, .tp-eps.tp-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:.8rem .7rem; }
+.tp-eps.tp-grid .tp-ep { display:block; padding:.35rem; }
+.tp-eps.tp-grid .tp-ept { margin-top:.5rem; }
+.tp-eps.tp-nums { display:grid; grid-template-columns:repeat(auto-fill, minmax(3.3rem, 1fr)); gap:.45rem; }
+.tp-num { min-height:44px; border-radius:10px; background:rgb(var(--card)); border:1px solid rgb(var(--line) / .12); font-size:.85rem; font-weight:600; color:rgb(var(--fg)); transition:border-color .15s ease, transform .15s ease; }
+.tp-num:hover { border-color:rgb(var(--accent) / .6); }
+.tp-num:active { transform:scale(.94); }
+.tp-num.watched { opacity:.55; }
+.tp-num.current { border-color:rgb(var(--accent)); color:rgb(var(--accent)); background:rgb(var(--accent) / .1); }
+.tp-sub { font-weight:700; margin:1.2rem 0 .7rem; }
+.tp-sub:first-child { margin-top:.2rem; }
+#tpPanelMore .tp-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:.7rem; }
+.tp-cell { position:relative; min-width:0; }
+.tp-rel { display:block; margin-top:.3rem; font-size:.7rem; color:rgb(var(--accent)); font-weight:600; }
+.tp-empty { padding:1.5rem 0; color:rgb(var(--g400)); font-size:.9rem; }
+@media (min-width:768px) {
+  .tp-list .tp-ep { grid-template-columns:2.2rem 12rem minmax(0,1fr); gap:1.1rem; padding:.7rem .6rem; }
+  .tp-ept b { font-size:1rem; } .tp-ept em { font-size:.84rem; -webkit-line-clamp:3; }
+  .tp-eps.tp-grid { grid-template-columns:repeat(4, minmax(0,1fr)); }
+  #tpPanelMore .tp-grid { grid-template-columns:repeat(5, minmax(0,1fr)); gap:1rem; }
+  .tp-eps.tp-nums { grid-template-columns:repeat(auto-fill, minmax(3.8rem, 1fr)); }
+}
+@media (prefers-reduced-motion:reduce) { .tp-anim, .tp-eps.tp-anim > * { animation:none; } .tp-ind.ready { transition:none; } }
+</style>
+<style id="aniverse-ads-toggle">
+.ads-toggle { display:inline-flex; align-items:center; gap:.5rem; margin-left:.5rem; padding:.3rem .65rem .3rem .8rem; border-radius:99px; font-size:.75rem; font-weight:500; background:rgb(var(--card)); border:1px solid rgb(var(--line) / .12); color:rgb(var(--fg)); transition:border-color .2s ease; }
+.ads-toggle:hover { border-color:rgb(var(--accent) / .55); }
+.ads-sw { position:relative; display:inline-block; width:34px; height:20px; border-radius:99px; background:rgb(var(--card2)); border:1px solid rgb(var(--line) / .2); transition:background .2s ease, border-color .2s ease; }
+.ads-sw b { position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%; background:rgb(var(--g300)); transition:transform .22s cubic-bezier(.3,.7,.2,1), background .2s ease; }
+.ads-toggle.on .ads-sw { background:rgb(var(--accent) / .28); border-color:rgb(var(--accent) / .7); }
+.ads-toggle.on .ads-sw b { transform:translateX(14px); background:rgb(var(--accent)); }
+.ads-state { min-width:1.4rem; font-style:normal; color:rgb(var(--g400)); }
+.ads-toggle.on .ads-state { color:rgb(var(--accent)); }
+@media (prefers-reduced-motion:reduce) { .ads-sw, .ads-sw b { transition:none; } }
+</style>
 </head>
 <body class="font-sans min-h-screen">
 
@@ -1863,12 +1984,33 @@ const hasRem = (id) => idSet(REM_KEY).has(String(id));
 /* ---------- BACKEND / STREAM SOURCES (embed URL builders) ---------- */
 // Embed URL for direct providers. AniEmbed requires an AniList ID; other providers retain their existing ID routes.
 // route: 'ani' (AniList id) or 'mal' (MAL id). language: 'sub' | 'dub'. Returns the full iframe src string.
+// Seconds to resume from (0 = start). Ignores finished episodes and trivial positions, rewinds 3s for context.
+function getResumeTime(animeId, episode) {
+  const p = getContinueWatching().find(x => String(x.id) === String(animeId) && Number(x.episode) === Number(episode));
+  if (!p || p.completed) return 0;
+  const t = Number(p.currentTime), d = Number(p.duration);
+  if (!Number.isFinite(t) || t < 10) return 0;
+  if ((Number.isFinite(d) && d > 0 && t / d >= 0.95) || Number(p.progressPercent) >= 95) return 0;
+  return Math.floor(Math.max(0, t - 3));
+}
+function withResume(url, timestamp, names) {
+  const t = Math.floor(Number(timestamp) || 0);
+  if (t <= 0) return url;
+  const u = new URL(url);
+  names.forEach(n => u.searchParams.set(n, String(t)));
+  return u.toString();
+}
 function buildEmbedSrc(server, { id, route, episode, language, timestamp = 0, total = 0 }) {
+  const url = buildEmbedSrcBase(server, { id, route, episode, language, timestamp, total });
+  // aniembed already gets ?t= below; other providers get the common start-time params (unknown ones are ignored).
+  return server === 'aniembed' ? url : withResume(url, timestamp, ['t', 'start', 'startAt', 'time']);
+}
+function buildEmbedSrcBase(server, { id, route, episode, language, timestamp = 0, total = 0 }) {
   if (server === 'aniembed') {
     // Match the provider's working minimal embed behavior: do not force autoplay.
     // Keep only language and a saved resume timestamp; provider navigation controls remain inside the player.
     const params = new URLSearchParams({ lang: language === 'dub' ? 'dub' : 'sub' });
-    if (Number.isFinite(Number(timestamp)) && Number(timestamp) > 0) params.set('t', String(Math.floor(Number(timestamp))));
+    if (Number.isFinite(Number(timestamp)) && Number(timestamp) > 0) { const ts = String(Math.floor(Number(timestamp))); params.set('t', ts); params.set('start', ts); params.set('startAt', ts); }
     return `https://aniembed.se/e/${encodeURIComponent(id)}/${episode}?${params.toString()}`;
   }
   if (server === 'anipm') {
@@ -1886,13 +2028,15 @@ function buildEmbedSrc(server, { id, route, episode, language, timestamp = 0, to
   return `${MEGAVID_BASE}/${route}/${encodeURIComponent(id)}/${episode}/${language}`;
 }
 // FramexTV embed (needs an AniList id, see resolveFramexAniListId). Returns { src, isMovie }.
-function buildFramexSrc(anilistId, current, episode, language) {
+function buildFramexSrc(anilistId, current, episode, language, timestamp = 0) {
   const isMovie = /movie/i.test(String(current.format || current.type || ''));
   const params = new URLSearchParams({ id: String(anilistId), type: isMovie ? 'movie' : 'tv', sub_type: language === 'dub' ? 'dub' : 'sub' });
   if (!isMovie) {
     params.set('season', String(Math.max(1, Number(current.framexSeason) || 1)));
     params.set('episode', String(episode));
   }
+  const t = Math.floor(Number(timestamp) || 0);
+  if (t > 0) { params.set('t', String(t)); params.set('start', String(t)); params.set('progress', String(t)); }
   return { src: `${FRAMEXTV_BASE}/embed/anime?${params.toString()}`, isMovie };
 }
 
@@ -2052,7 +2196,7 @@ async function renderHome() {
               <p class="text-accent text-sm font-semibold mb-2">#${i + 1} ${heroLabel()}${a.score ? ' • ★ ' + a.score : ''}</p>
               <h2 class="text-3xl md:text-5xl font-extrabold leading-tight clamp2">${esc(a.title)}</h2>
               <p class="mt-4 text-sm md:text-base text-gray-300 clamp3">${esc(a.synopsis || 'No storyline available yet.')}</p>
-              <div class="hero-cta"><button data-watch="${a.mal_id}" class="hero-play">Play</button><button data-watch="${a.mal_id}" class="hero-info">More Info</button></div>
+              <div class="hero-cta"><button data-play="${a.mal_id}" class="hero-play">Play</button><button data-watch="${a.mal_id}" class="hero-info">More Info</button></div>
             </div>
             <img src="${esc(img(a, true))}" ${imgFallbackAttr(a, true)} alt="${esc(a.title)}" ${i === 0 ? '' : 'loading="lazy"'} decoding="async" class="hidden lg:block h-[75%] aspect-[2/3] object-cover rounded-2xl shadow-2xl ml-auto">
           </div>
@@ -2162,8 +2306,6 @@ async function loadTop10(animate = false) {
     if (!stale()) { box.classList.remove('top10-out'); box.innerHTML = '<li class="text-sm text-gray-500">Could not load the list. Switch the period to try again.</li>'; }
   }
 }
-const adsToggleObserver = new MutationObserver(() => { if (document.querySelector('[data-ads-toggle]')) refreshAdsToggle(); });
-adsToggleObserver.observe(document.body, { childList: true, subtree: true });
 document.addEventListener('click', (e) => {
   const b = e.target.closest('.seg button[data-p]');
   if (!b || b.classList.contains('on')) return;
@@ -2295,7 +2437,7 @@ async function renderAniKotoWatch(id) {
     const title = anikotoTitle(anime);
     if (!Array.isArray(episodes) || !episodes.length) throw new Error('This series response did not contain an episode list.');
     window.currentAniKoto = { id, title, episodes, episodeIndex: 0, language: 'sub' };
-    app.innerHTML = `<div class="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-[1fr_320px] gap-8 fade-in"><div><div id="akPlayer" class="aspect-video rounded-2xl overflow-hidden bg-black border border-white/5 flex items-center justify-center"><p class="text-gray-500 p-4">Select an episode to start playback.</p></div><div class="mt-3 flex flex-wrap items-center gap-2"><span class="text-xs text-gray-400 mr-1">Audio:</span><button data-ak-language="sub" class="ak-language px-3 py-1.5 rounded-full text-xs bg-accent text-black">Sub</button><button data-ak-language="dub" class="ak-language px-3 py-1.5 rounded-full text-xs bg-card">Dub</button></div><p id="akNowPlaying" class="mt-3 text-sm text-gray-400">Choose an episode.</p><h1 class="text-2xl md:text-3xl font-extrabold mt-4">${esc(title)}</h1><p class="text-gray-500 text-sm mt-2">Episode data provided by AniKoto; playback embedded with SupaPlay when an episode ID is available.</p><button data-nav="home" class="mt-5 px-4 py-2 rounded-full bg-card hover:bg-accent hover:text-black text-sm">← Back to home</button></div><aside class="bg-panel rounded-2xl border border-white/5 p-4 h-fit"><h2 class="font-bold mb-3">Episodes <span class="text-gray-500 font-normal text-sm">(${episodes.length})</span></h2><div class="grid grid-cols-5 sm:grid-cols-6 lg:grid-cols-5 gap-2 max-h-[480px] overflow-y-auto pr-1">${episodes.map((ep, i) => `<button data-ak-ep="${i}" class="ak-ep py-2 rounded-lg bg-card text-sm hover:bg-accent hover:text-black" title="${esc(ep.title || ep.name || ('Episode ' + (ep.episode_number || i+1)))}">${esc(ep.episode_number ?? ep.number ?? i+1)}</button>`).join('')}</div></aside></div>`;
+    app.innerHTML = `<div class="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-[1fr_320px] gap-8 fade-in"><div><div id="akPlayer" class="aspect-video rounded-2xl overflow-hidden bg-black border border-white/5 flex items-center justify-center"><p class="text-gray-500 p-4">Select an episode to start playback.</p></div><div class="mt-3 flex flex-wrap items-center gap-2"><span class="text-xs text-gray-400 mr-1">Audio:</span><button data-ak-language="sub" class="ak-language px-3 py-1.5 rounded-full text-xs bg-accent text-black">Sub</button><button data-ak-language="dub" class="ak-language px-3 py-1.5 rounded-full text-xs bg-card">Dub</button><button type="button" id="adsToggle" class="ads-toggle" role="switch" aria-checked="false" title="Off blocks pop-up ads (player sandbox). Turn On if a player will not play."><span>Ads</span><i class="ads-sw"><b></b></i><em class="ads-state">Off</em></button></div><p id="akNowPlaying" class="mt-3 text-sm text-gray-400">Choose an episode.</p><h1 class="text-2xl md:text-3xl font-extrabold mt-4">${esc(title)}</h1><p class="text-gray-500 text-sm mt-2">Episode data provided by AniKoto; playback embedded with SupaPlay when an episode ID is available.</p><button data-nav="home" class="mt-5 px-4 py-2 rounded-full bg-card hover:bg-accent hover:text-black text-sm">← Back to home</button></div><aside class="bg-panel rounded-2xl border border-white/5 p-4 h-fit"><h2 class="font-bold mb-3">Episodes <span class="text-gray-500 font-normal text-sm">(${episodes.length})</span></h2><div class="grid grid-cols-5 sm:grid-cols-6 lg:grid-cols-5 gap-2 max-h-[480px] overflow-y-auto pr-1">${episodes.map((ep, i) => `<button data-ak-ep="${i}" class="ak-ep py-2 rounded-lg bg-card text-sm hover:bg-accent hover:text-black" title="${esc(ep.title || ep.name || ('Episode ' + (ep.episode_number || i+1)))}">${esc(ep.episode_number ?? ep.number ?? i+1)}</button>`).join('')}</div></aside></div>`;
     playAniKotoEpisode(0);
   } catch (error) {
     if (state.view !== 'anikoto-watch') return;
@@ -2303,9 +2445,33 @@ async function renderAniKotoWatch(id) {
     app.innerHTML = `<div class="max-w-3xl mx-auto px-4 py-20"><h1 class="text-2xl font-bold">Could not load AniKoto series</h1><p class="text-gray-400 mt-3">${esc(detail)}</p><a class="inline-block mt-4 text-accent underline" href="${ANIKOTO_BASE}/series/${encodeURIComponent(id)}" target="_blank" rel="noopener noreferrer">Open series JSON ↗</a><button data-nav="home" class="block mt-5 px-4 py-2 rounded-full bg-card">Back to home</button></div>`;
   }
 }
+/* ---------- Ads switch: Off = sandboxed player (blocks pop-up ads), On = no sandbox ---------- */
+const ADS_KEY = 'aniverse_ads_v1';
+let adsMem = false;   // used if the browser blocks localStorage
+try { adsMem = localStorage.getItem(ADS_KEY) === 'on'; } catch (_) {}
+const adsOn = () => adsMem;
+const PLAYER_SANDBOX = 'allow-scripts allow-same-origin allow-forms allow-presentation';   // no allow-popups / allow-top-navigation: that is what stops the ads
+const sandboxAttr = () => adsOn() ? '' : ` sandbox="${PLAYER_SANDBOX}"`;
+function syncAdsUi() {
+  const on = adsOn();
+  document.querySelectorAll('#adsToggle').forEach(b => { b.setAttribute('aria-checked', String(on)); b.classList.toggle('on', on); const st = b.querySelector('.ads-state'); if (st) st.textContent = on ? 'On' : 'Off'; });
+  const h = $('#adsHint'); if (h) h.textContent = on ? 'Ads On: the player runs without a sandbox, so pop-ups and redirects can appear.' : "Ads Off: pop-ups are blocked. If a player won't play, turn Ads On.";
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('#adsToggle'); if (!b) return;
+  e.preventDefault();
+  adsMem = !adsMem;
+  try { localStorage.setItem(ADS_KEY, adsMem ? 'on' : 'off'); } catch (_) {}
+  syncAdsUi();
+  // a sandbox can only be set when the frame loads, so reload the current player with the new setting
+  if ($('#akPlayer') && window.currentAniKoto && window.currentAniKoto.episodeIndex != null) return playAniKotoEpisode(window.currentAniKoto.episodeIndex);
+  const c = window.currentAnime;
+  if (c && c.mode !== 'trailer' && c.episode > 0 && $('#player iframe')) playEpisode(c.episode);
+});
 function playAniKotoEpisode(index) {
   const current = window.currentAniKoto;
   if (!current) return;
+  syncAdsUi();
   const ep = current.episodes[index];
   if (!ep) return;
   current.episodeIndex = index;
@@ -2329,7 +2495,7 @@ function playAniKotoEpisode(index) {
     label.textContent = `Episode ${index + 1} · No player URL or episode_embed_id was returned.`;
     return;
   }
-  player.innerHTML = `<iframe class="w-full h-full" src="${esc(src)}" title="${esc(current.title)} episode ${index+1}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+  player.innerHTML = `<iframe class="w-full h-full"${sandboxAttr()} src="${esc(src)}" title="${esc(current.title)} episode ${index+1}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
   label.textContent = `Episode ${ep.episode_number ?? ep.number ?? index + 1} · ${current.language === 'dub' ? 'Dub' : 'Sub'} · Embedded player.`;
 }
 
@@ -2634,7 +2800,7 @@ async function loadSeasons(id) {
   try {
     const chain = await getSeasonChain(id);
     const wrap = $('#seasonWrap'), bar = $('#seasonBar');
-    if (!wrap || !bar || state.view !== 'watch' || String(state.id) !== String(id) || chain.length < 2) return;
+    if (!wrap || !bar || (state.view !== 'watch' && state.view !== 'title') || String(state.id) !== String(id) || chain.length < 2) return;
     let n = 0;
     bar.innerHTML = chain.map(m => {
       const isSeason = ['TV', 'TV_SHORT', 'ONA'].includes(m.format);
@@ -2657,7 +2823,7 @@ async function loadRelatedSimilar(id) {
   try {
     let data = rsCache.get(String(id));
     if (!data) { data = (await gql(RS_Q, { id: +id }, true)).Media; rsCache.set(String(id), data); }
-    if (state.view !== 'watch' || String(state.id) !== String(id)) return;
+    if ((state.view !== 'watch' && state.view !== 'title') || String(state.id) !== String(id)) return;
     const rel = (data.relations?.edges || [])
       .filter(e => e.node?.type === 'ANIME')
       .sort((x, y) => (REL_ORDER.indexOf(x.relationType) + 99) % 99 - (REL_ORDER.indexOf(y.relationType) + 99) % 99);
@@ -2672,17 +2838,171 @@ async function loadRelatedSimilar(id) {
   } catch (_) { /* optional sections */ }
 }
 
-const ADS_SANDBOX_KEY = 'aniverse_ads_sandbox_v1';
-function adsSandboxEnabled() { try { return localStorage.getItem(ADS_SANDBOX_KEY) === '1'; } catch (_) { return false; } }
-function adsSandboxAttr() { return adsSandboxEnabled() ? 'sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock allow-pointer-lock allow-downloads"' : ''; }
-function refreshAdsToggle() {
-  const b = document.querySelector('[data-ads-toggle]');
-  if (!b) return;
-  const on = adsSandboxEnabled();
-  b.setAttribute('aria-pressed', String(on));
-  b.classList.toggle('bg-accent', on); b.classList.toggle('text-black', on);
-  b.classList.toggle('bg-card', !on); const label = 'Ads: ' + (on ? 'Blocked' : 'Allowed'); if (b.textContent !== label) b.textContent = label;
+/* ---------- Title page: the details page between a card and the player ---------- */
+const BASE_TITLE = document.title || 'Aniverse';
+const TP_ICON = {
+  play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor" stroke="none"/></svg>',
+  mark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>',
+  trailer: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg>',
+  back: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>'
+};
+/* ---- Title page: tabs, episode views, More like this ---- */
+const TP_PER = 50, TP_EV_KEY = 'aniverse_ep_view';
+const tpView = () => { try { const v = localStorage.getItem(TP_EV_KEY); return ['list', 'grid', 'nums'].includes(v) ? v : 'list'; } catch (_) { return 'list'; } };
+const TP_VIEW_ICON = {
+  list: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
+  grid: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>',
+  nums: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h3M11 7h3M17 7h2M5 12h3M11 12h3M17 12h2M5 17h3M11 17h3"/></svg>'
+};
+function placeTpInd() {
+  const bar = document.querySelector('.tp-tabs'); if (!bar) return;
+  const on = bar.querySelector('button.on'), ind = bar.querySelector('.tp-ind'); if (!on || !ind) return;
+  ind.style.width = on.offsetWidth + 'px'; ind.style.transform = 'translateX(' + on.offsetLeft + 'px)';
+  requestAnimationFrame(() => ind.classList.add('ready'));
 }
+window.addEventListener('resize', placeTpInd);
+function tpAnimate(el) { if (!el) return; el.classList.remove('tp-anim'); void el.offsetWidth; el.classList.add('tp-anim'); }
+function tpRenderEpisodes(animate) {
+  const t = window.__tp, tools = $('#tpEpTools'), box = $('#tpEpList'); if (!t || !tools || !box) return;
+  const pages = Math.ceil(t.total / TP_PER), from = t.range * TP_PER + 1, to = Math.min(t.total, from + TP_PER - 1);
+  tools.innerHTML = `<div class="tp-tools">${pages > 1 ? `<div class="tp-ranges">${Array.from({ length: pages }, (_, r) => `<button type="button" data-ep-range="${r}" class="${r === t.range ? 'on' : ''}">${r * TP_PER + 1}–${Math.min(t.total, (r + 1) * TP_PER)}</button>`).join('')}</div>` : '<span></span>'}<div class="seg tp-evsw" role="tablist" aria-label="Episode view"><span class="seg-thumb" aria-hidden="true"></span>${['list', 'grid', 'nums'].map(k => `<button type="button" role="tab" data-ev="${k}" class="${t.view === k ? 'on' : ''}" aria-selected="${t.view === k}" aria-label="${{ list: 'List', grid: 'Grid', nums: 'Numbers' }[k]} view" title="${{ list: 'List', grid: 'Grid', nums: 'Numbers' }[k]}">${TP_VIEW_ICON[k]}</button>`).join('')}</div></div>`;
+  const id = esc(t.a.mal_id), movie = t.total === 1 && /movie/i.test(t.a.type || '');
+  const items = [];
+  for (let n = from; n <= to; n++) {
+    const m = (t.meta && (t.meta[n] || t.meta[String(n)])) || null, cur = t.cur && t.cur.ep === n, seen = t.watched.has(n) && !cur;
+    const name = (m && m.title) || (movie ? 'Movie' : 'Episode ' + n);
+    const sub = [m && m.runtime ? m.runtime + ' min' : '', m && m.airdate ? m.airdate : ''].filter(Boolean).join(' · ');
+    const cls = 'tp-ep' + (cur ? ' current' : '') + (seen ? ' watched' : '');
+    const thumb = `<span class="tp-thumb${m && m.image ? '' : ' ph'}"${m && m.image ? ` style="background-image:url('${esc(m.image)}')"` : ''}><span class="pl">${TP_ICON.play}</span>${seen ? '<span class="tp-chk" aria-label="Watched"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>' : ''}${cur && t.cur.pct > 0 ? `<span class="tp-bar"><i style="width:${t.cur.pct}%"></i></span>` : ''}</span>`;
+    const at = `data-resume="${id}" data-resume-ep="${n}" style="--i:${Math.min(items.length, 14)}"`;
+    if (t.view === 'nums') items.push(`<button type="button" ${at} class="tp-num${cur ? ' current' : ''}${seen ? ' watched' : ''}" aria-label="${esc(name)}">${n}</button>`);
+    else if (t.view === 'grid') items.push(`<button type="button" ${at} class="${cls} tp-card">${thumb}<span class="tp-ept"><b>${movie ? '' : n + '. '}${esc(name)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}${cur ? '<small class="tp-now">Continue watching</small>' : ''}</span></button>`);
+    else items.push(`<button type="button" ${at} class="${cls}"><span class="tp-epn">${n}</span>${thumb}<span class="tp-ept"><b>${esc(name)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}${cur ? '<small class="tp-now">Continue watching</small>' : ''}${m && m.overview ? `<em>${esc(m.overview)}</em>` : ''}</span></button>`);
+  }
+  box.className = 'tp-eps tp-' + t.view;
+  box.innerHTML = items.join('');
+  if (animate) tpAnimate(box);
+  requestAnimationFrame(placeSeg);
+}
+function tpSetView(v) {
+  const t = window.__tp; if (!t || t.view === v) return;
+  t.view = v; try { localStorage.setItem(TP_EV_KEY, v); } catch (_) {}
+  const sw = document.querySelector('.tp-evsw'); if (sw) { sw.querySelectorAll('button').forEach(b => { b.classList.toggle('on', b.dataset.ev === v); b.setAttribute('aria-selected', String(b.dataset.ev === v)); }); placeSeg(); }
+  tpRenderEpisodes(true);
+}
+async function tpLoadMore() {
+  const t = window.__tp, box = $('#tpPanelMore'); if (!t || !box || t.moreLoaded) return;
+  t.moreLoaded = true;
+  box.innerHTML = `<div class="tp-grid">${Array.from({ length: 6 }, () => '<div class="skeleton" style="aspect-ratio:2/3;border-radius:12px"></div>').join('')}</div>`;
+  try {
+    let data = rsCache.get(t.id);
+    if (!data) { data = (await gql(RS_Q, { id: +t.id }, true)).Media; rsCache.set(t.id, data); }
+    if (window.__tp !== t || !$('#tpPanelMore')) return;
+    const rel = (data.relations?.edges || []).filter(e => e.node?.type === 'ANIME').sort((x, y) => (REL_ORDER.indexOf(x.relationType) + 99) % 99 - (REL_ORDER.indexOf(y.relationType) + 99) % 99);
+    const seen = new Set([t.id]), relIds = new Set(rel.map(e => String(e.node.id)));
+    const sim = (data.recommendations?.nodes || []).map(n => n.mediaRecommendation).filter(m => m && m.type === 'ANIME' && !relIds.has(String(m.id)) && !seen.has(String(m.id)) && seen.add(String(m.id)));
+    const cells = (list) => list.map((x, i) => `<div class="tp-cell">${card(norm(x.node || x), i)}${x.relationType ? `<small class="tp-rel">${esc(relLabel(x.relationType))}</small>` : ''}</div>`).join('');
+    box.innerHTML = (rel.length ? `<h3 class="tp-sub">Related</h3><div class="tp-grid">${cells(rel)}</div>` : '') + (sim.length ? `<h3 class="tp-sub">More like this</h3><div class="tp-grid">${cells(sim)}</div>` : '') || '<p class="tp-empty">Nothing similar to show right now.</p>';
+    tpAnimate(box);
+  } catch (_) { t.moreLoaded = false; if ($('#tpPanelMore')) $('#tpPanelMore').innerHTML = '<p class="tp-empty">Could not load similar titles. Open this tab again to retry.</p>'; }
+}
+function tpSetTab(name) {
+  const t = window.__tp; if (!t || t.tab === name) return;
+  t.tab = name;
+  document.querySelectorAll('.tp-tabs button').forEach(b => { const on = b.dataset.tpTab === name; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
+  placeTpInd();
+  for (const [k, id] of [['episodes', '#tpPanelEpisodes'], ['more', '#tpPanelMore'], ['details', '#tpPanelDetails']]) { const el = $(id); if (el) el.hidden = k !== name; }
+  const panel = $({ episodes: '#tpPanelEpisodes', more: '#tpPanelMore', details: '#tpPanelDetails' }[name]);
+  if (name === 'more') tpLoadMore();
+  tpAnimate(panel);
+}
+async function renderTitle(id) {
+  const app = $('#app');
+  app.innerHTML = `<div class="tp"><div class="tp-wrap"><div class="tp-poster"><div class="skeleton" style="aspect-ratio:2/3;border-radius:14px"></div></div><div class="tp-head"><div class="skeleton" style="height:1.8rem;width:70%;border-radius:.5rem"></div><div class="skeleton" style="height:1rem;width:45%;margin-top:.8rem;border-radius:.5rem"></div></div></div></div>`;
+  try {
+    const { data: a } = await getAnime(id);
+    if (state.view !== 'title' || String(state.id) !== String(id)) return;
+    if (a.unreleased) { state.view = 'watch'; return renderWatch(id); }   // not released yet: the "coming soon" page already covers it
+    window.currentAnime = null; ANIME_REG[a.mal_id] = a;
+    document.title = a.title + ' · ' + BASE_TITLE;
+    const aid = esc(a.mal_id), done = getHistory().find(x => String(x.id) === String(a.mal_id));
+    const bg = a.banner || img(a, true);
+    const chips = [a.score ? '★ ' + a.score : '', a.type, a.status, a.episodes ? a.episodes + ' eps' : '', a.season].filter(Boolean);
+    const meta = [['Aired', a.aired?.string], ['Season', a.season], ['Studio', (a.studios || []).map(x => x.name).join(', ')], ['Episodes', a.episodes || 'Unknown'], ['Status', a.status], ['Type', a.type], ['Score', a.score ? '★ ' + a.score : 'N/A'], ['Japanese', a.title_japanese]].filter(([, v]) => v);
+    const trailer = a.trailer?.embed_url && location.protocol !== 'file:' ? a.trailer.embed_url : '';
+    const syn = a.synopsis || 'No storyline available yet.';
+    app.innerHTML = `<div class="tp fade-in">
+      <div class="tp-hero"><div class="tp-bg" style="background-image:url('${esc(bg)}')"></div><div class="tp-scrim"></div>
+        <button type="button" data-title-back class="tp-back">${TP_ICON.back} Back</button>
+        <div class="tp-wrap">
+          <div class="tp-poster"><img src="${esc(img(a, true))}" ${imgFallbackAttr(a, true)} alt="${esc(a.title)}"></div>
+          <div class="tp-head">
+            <h1 class="tp-title">${esc(a.title)}</h1>
+            ${a.title_japanese && a.title_japanese !== a.title ? `<p class="tp-jp">${esc(a.title_japanese)}</p>` : ''}
+            <div class="tp-chips">${chips.map((c, i) => `<span class="tp-chip${i === 0 && a.score ? ' sc' : ''}">${esc(c)}</span>`).join('')}</div>
+            <div class="tp-chips tp-genres">${(a.genres || []).map(g => `<button type="button" data-genre="${esc(g.name)}" class="tp-chip tp-link">${esc(g.name)}</button>`).join('')}</div>
+          </div>
+          <div class="tp-rest">
+            <div class="tp-cta">
+              <button type="button" data-play="${aid}" class="tp-btn tp-primary">${TP_ICON.play} Watch now</button>
+              ${done ? `<button type="button" data-resume="${aid}" data-resume-ep="${Math.max(1, Number(done.episode) || 1)}" class="tp-btn">Continue · Ep ${Math.max(1, Number(done.episode) || 1)}</button>` : ''}
+              <button type="button" data-save="${aid}" class="tp-btn tp-save${inList(a.mal_id) ? ' on' : ''}">${TP_ICON.mark} My List</button>
+              ${trailer ? `<button type="button" data-trailer-toggle class="tp-btn">${TP_ICON.trailer} Trailer</button>` : ''}
+            </div>
+            ${trailer ? `<div id="tpTrailer" class="tp-trailer" data-src="${esc(trailer)}" hidden></div>` : ''}
+            <p id="tpSyn" class="tp-syn">${esc(syn)}</p>
+            ${syn.length > 260 ? '<button type="button" data-syn-toggle class="tp-more">Read more</button>' : ''}
+          </div>
+        </div>
+      </div>
+      <div class="tp-body">
+        <div class="tp-tabs" role="tablist" aria-label="Title sections">
+          <button type="button" role="tab" data-tp-tab="episodes" class="on" aria-selected="true">Episodes</button>
+          <button type="button" role="tab" data-tp-tab="more" aria-selected="false">More like this</button>
+          <button type="button" role="tab" data-tp-tab="details" aria-selected="false">Details</button>
+          <span class="tp-ind" aria-hidden="true"></span>
+        </div>
+        <div id="tpPanelEpisodes" class="tp-panel">
+          <div id="seasonWrap" class="hidden tp-seasons"><div id="seasonBar" class="flex flex-wrap gap-2"></div></div>
+          <div id="tpEpTools"></div><div id="tpEpList"></div>
+        </div>
+        <div id="tpPanelMore" class="tp-panel" hidden></div>
+        <div id="tpPanelDetails" class="tp-panel" hidden><dl class="tp-meta">${meta.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></div>
+      </div></div>`;
+    window.scrollTo(0, 0);
+    const total = Math.max(1, Math.min(Number(a.episodes) || (/movie/i.test(a.type || '') ? 1 : 12), 3000));
+    const cw = getContinueWatching().find(x => String(x.id) === String(a.mal_id));
+    window.__tp = { id: String(a.mal_id), a, total, view: tpView(), meta: null, tab: 'episodes', moreLoaded: false,
+      watched: new Set((done?.watched || []).map(Number)), cur: cw ? { ep: Math.max(1, Number(cw.episode) || 1), pct: Math.max(0, Math.min(100, Number(cw.progressPercent) || 0)) } : null };
+    window.__tp.range = Math.floor(((window.__tp.cur?.ep || 1) - 1) / TP_PER);
+    tpRenderEpisodes(false);
+    requestAnimationFrame(placeTpInd); document.fonts?.ready.then(placeTpInd);
+    loadSeasons(a.mal_id);
+    const mid = a.anilist_id || a.mal_id;
+    if (typeof getEpisodeMeta === 'function' && !a.jikanFallback && /^\d+$/.test(String(mid))) {   // backend adds titles + thumbnails when it provides this (see CONTRACT.md)
+      Promise.resolve(getEpisodeMeta(mid)).then(m => { const t = window.__tp; if (t && t.id === String(a.mal_id) && m && typeof m === 'object') { t.meta = m; tpRenderEpisodes(false); } }).catch(() => {});
+    }
+  } catch (e) {
+    if (state.view === 'title') app.innerHTML = `<div class="max-w-7xl mx-auto px-4 py-8">${errorBox('Could not load this title. Check your connection and try again.', lastError)}</div>`;
+  }
+}
+document.addEventListener('click', (e) => {
+  const tab = e.target.closest('[data-tp-tab]'); if (tab) { e.preventDefault(); return tpSetTab(tab.dataset.tpTab); }
+  const ev = e.target.closest('[data-ev]'); if (ev) { e.preventDefault(); return tpSetView(ev.dataset.ev); }
+  const rg = e.target.closest('[data-ep-range]'); if (rg && window.__tp) { e.preventDefault(); window.__tp.range = +rg.dataset.epRange; return tpRenderEpisodes(true); }
+  const play = e.target.closest('[data-play]');
+  if (play) { e.preventDefault(); return navigate('watch', { id: play.dataset.play }); }
+  if (e.target.closest('[data-title-back]')) { e.preventDefault(); return (window.__aniNavd && usesWebUrlRoutes) ? history.back() : navigate('home'); }
+  const more = e.target.closest('[data-syn-toggle]');
+  if (more) { const p = $('#tpSyn'); const open = p.classList.toggle('open'); more.textContent = open ? 'Show less' : 'Read more'; return; }
+  const tr = e.target.closest('[data-trailer-toggle]');
+  if (tr) {
+    const box = $('#tpTrailer'); if (!box) return;
+    if (box.hidden && !box.firstChild) box.innerHTML = `<iframe src="${esc(box.dataset.src)}" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Trailer"></iframe>`;
+    box.hidden = !box.hidden; tr.classList.toggle('on', !box.hidden);
+    if (box.hidden) box.innerHTML = '';
+  }
+});
 async function renderWatch(id) {
   const app = $('#app');
   app.innerHTML = `<div class="max-w-7xl mx-auto px-4 py-8"><div class="aspect-video rounded-2xl skeleton"></div></div>`;
@@ -2725,7 +3045,6 @@ async function renderWatch(id) {
         
         <div class="mt-3 flex flex-wrap items-center gap-2 w-controls">
           <span class="text-xs text-gray-400 mr-1">Server:</span>
-          <button data-ads-toggle aria-pressed="false" title="Toggle iframe popup restrictions" class="px-3 py-1.5 rounded-full text-xs bg-card border border-white/10">Ads: Allowed</button>
           <button data-server="aniembed" class="server px-3 py-1.5 rounded-full text-xs bg-accent text-black border border-white/5">AniEmbed · Primary</button>
           <button data-server="anipm" class="server px-3 py-1.5 rounded-full text-xs bg-card hover:bg-accent hover:text-black border border-white/5">AniPM</button>
           <button data-server="anixo" class="server px-3 py-1.5 rounded-full text-xs bg-card hover:bg-accent hover:text-black border border-white/5">Anixo</button>
@@ -2735,9 +3054,11 @@ async function renderWatch(id) {
           <span class="text-xs text-gray-400 mr-1 ml-2">Audio:</span>
           <button data-language="sub" class="language px-3 py-1.5 rounded-full text-xs bg-accent text-black border border-white/5">Sub</button>
           <button data-language="dub" class="language px-3 py-1.5 rounded-full text-xs bg-card hover:bg-accent hover:text-black border border-white/5">Dub</button>
+          <button type="button" id="adsToggle" class="ads-toggle" role="switch" aria-checked="false" title="Off blocks pop-up ads (player sandbox). Turn On if a player will not play."><span>Ads</span><i class="ads-sw"><b></b></i><em class="ads-state">Off</em></button>
           ${trailer ? `<button data-mode="trailer" class="mode px-3 py-1.5 rounded-full text-xs bg-card hover:bg-accent hover:text-black border border-white/5">Trailer</button>` : ''}
         </div>
         <p id="nowPlaying" class="mt-3 text-sm text-gray-400"></p>
+        <p id="adsHint" class="mt-1 text-xs text-gray-500"></p>
         ${a.links?.length ? `<div class="mt-4 w-links"><p class="text-sm text-gray-400 mb-2">Where to watch (official)</p><div class="flex flex-wrap gap-2">${a.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-full text-xs bg-card hover:bg-accent hover:text-black border border-white/5">${esc(l.site)}</a>`).join('')}</div></div>` : ''}
         <div class="w-head"><h1 class="text-2xl md:text-3xl font-extrabold mt-4">${esc(a.title)}</h1>
         ${a.title_japanese ? `<p class="text-gray-500 text-sm">${esc(a.title_japanese)}</p>` : ''}</div>
@@ -2779,6 +3100,7 @@ function buildEpRange(r) {
 function playEpisode(n) {
   const current = window.currentAnime;
   if (!current) return;
+  syncAdsUi();
   if (n > 0) { const r = Math.floor((Math.min(n, current.total) - 1) / EP_PAGE); if (r !== current.epRange || !$('#epGrid')?.childElementCount) { current.episode = Math.min(n, current.total); buildEpRange(r); } }
   else if (!$('#epGrid')?.childElementCount) buildEpRange(current.epRange || 0);
   const { id, trailer, language } = current;
@@ -2819,6 +3141,9 @@ function playEpisode(n) {
   const episode = Math.max(1, Math.min(Number(n) || 1, current.total || 200));
   current.episode = episode;
   // Preserve the existing Continue Watching record and any saved timestamp when switching players.
+  flushPendingPlaybackProgress();   // make sure the latest position is on disk before we read it
+  const resumeAt = getResumeTime(current.id, episode);
+  current.resumePending = resumeAt > 0 ? { episode, at: resumeAt, started: Date.now(), tries: 0, lastTry: 0 } : null;
   const previousProgress = getContinueWatching().find(x => String(x.id) === String(current.id));
   const keepTimestamp = previousProgress && Number(previousProgress.episode) === episode;
   saveContinueWatching({ ...(keepTimestamp ? previousProgress : {}), id: current.id, title: current.title, image: current.image || '', episode, language, total: current.total || 0 });
@@ -2842,8 +3167,8 @@ function playEpisode(n) {
       const frame = document.querySelector('#player');
       if (!frame) return;
       const progress = getContinueWatching().find(x => String(x.id) === String(current.id) && Number(x.episode) === episode);
-      const aniEmbedSrc = buildEmbedSrc('aniembed', { id: anilistId, episode, language, timestamp: progress?.currentTime || 0, total: current.total });
-      frame.innerHTML = `<iframe ${adsSandboxAttr()} id="anime-player" title="${esc(current.title || 'Anime')} episode ${episode}" src="${esc(aniEmbedSrc)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen scrolling="no" loading="eager" style="display:block;width:100%;height:100%;aspect-ratio:16/9;border:0;pointer-events:auto;position:relative;z-index:1;"></iframe>`;
+      const aniEmbedSrc = buildEmbedSrc('aniembed', { id: anilistId, episode, language, timestamp: resumeAt, total: current.total });
+      frame.innerHTML = `<iframe id="anime-player"${sandboxAttr()} title="${esc(current.title || 'Anime')} episode ${episode}" src="${esc(aniEmbedSrc)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen scrolling="no" loading="eager" style="display:block;width:100%;height:100%;aspect-ratio:16/9;border:0;pointer-events:auto;position:relative;z-index:1;"></iframe>`;
       label.textContent = `Episode ${episode} · ${language === 'dub' ? 'Dub' : 'Sub'} · Server: AniEmbed · AniList ID ${anilistId}.`;
     }).catch(() => {
       if (window.currentAnime === current && current.server === 'aniembed' && current.episode === episode) {
@@ -2854,11 +3179,11 @@ function playEpisode(n) {
     });
     return;
   } else if (server === 'anipm') {
-    src = buildEmbedSrc('anipm', { id, route, episode, language });   // fallback provider
+    src = buildEmbedSrc('anipm', { id, route, episode, language, timestamp: resumeAt });   // fallback provider
   } else if (server === 'vidcloud') {
-    src = buildEmbedSrc('vidcloud', { id, route, episode, language });   // backend: stream sources
+    src = buildEmbedSrc('vidcloud', { id, route, episode, language, timestamp: resumeAt });   // backend: stream sources
   } else if (server === 'anixo') {
-    src = buildEmbedSrc('anixo', { id, route, episode, language });   // backend: stream sources
+    src = buildEmbedSrc('anixo', { id, route, episode, language, timestamp: resumeAt });   // backend: stream sources
   } else if (server === 'framextv') {
     // FramexTV's documented anime route: /embed/anime?id=ANILIST_ID&type=tv|movie.
     // AniList IDs are used directly; Jikan fallback entries are mapped to AniList via AniZip.
@@ -2875,8 +3200,8 @@ function playEpisode(n) {
       }
       const frame = document.querySelector('#player');
       if (!frame) return;
-      const { src, isMovie } = buildFramexSrc(anilistId, current, episode, language);   // backend: stream sources
-      frame.innerHTML = `<iframe ${adsSandboxAttr()} class="w-full h-full" src="${esc(src)}" title="${esc(current.title || 'Anime')} · FramexTV" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; screen-wake-lock" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+      const { src, isMovie } = buildFramexSrc(anilistId, current, episode, language, resumeAt);   // backend: stream sources
+      frame.innerHTML = `<iframe class="w-full h-full"${sandboxAttr()} src="${esc(src)}" title="${esc(current.title || 'Anime')} · FramexTV" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; screen-wake-lock" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
       label.textContent = isMovie
         ? `Movie · ${language === 'dub' ? 'Dub' : 'Sub'} · Server: FramexTV · AniList ID ${anilistId}.`
         : `Episode ${episode} · Season ${Math.max(1, Number(current.framexSeason) || 1)} · ${language === 'dub' ? 'Dub' : 'Sub'} · Server: FramexTV · AniList ID ${anilistId}.`;
@@ -2889,12 +3214,45 @@ function playEpisode(n) {
     });
     return;
   } else {
-    src = buildEmbedSrc(server, { id, route, episode, language });   // backend: stream sources (megavid fallback)
+    src = buildEmbedSrc(server, { id, route, episode, language, timestamp: resumeAt });   // backend: stream sources (megavid fallback)
   }
-  // Keep all providers, including AniPM, free of iframe sandbox restrictions.
-  player.innerHTML = `<iframe ${adsSandboxAttr()} class="w-full h-full" src="${esc(src)}" title="${esc(current.title || 'Anime')} episode ${episode}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; screen-wake-lock" allowfullscreen loading="eager"></iframe>`;
+  // Ads Off = the player iframe is sandboxed (blocks pop-ups and redirects). Ads On = no sandbox, for players that refuse to run sandboxed.
+  player.innerHTML = `<iframe class="w-full h-full"${sandboxAttr()} src="${esc(src)}" title="${esc(current.title || 'Anime')} episode ${episode}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; screen-wake-lock" allowfullscreen loading="eager"></iframe>`;
   const serverName = server === 'anipm' ? 'AniPM · Fallback' : server === 'anixo' ? 'Anixo · Fallback' : server === 'vidcloud' ? 'VidCloud · Fallback' : 'Megavid · Fallback';
   label.textContent = `Episode ${episode} · ${language === 'dub' ? 'Dub' : 'Sub'} · Server: ${serverName}${server === 'vidcloud' ? ' · AutoSkip/AutoPlay/AutoNext enabled' : server === 'anipm' ? ' · AutoSkip/AutoNext enabled' : ''}.`;
+}
+/* Universal resume assist: works for any server that reports its position to us.
+   While a resume is pending we (a) don't let the player's early 0:00 reports overwrite the saved
+   position and (b) send seek commands in every common postMessage dialect until the player catches up. */
+const RESUME_GIVE_UP_MS = 30000, RESUME_RETRY_MS = 1500, RESUME_MAX_TRIES = 8;
+function sendSeekCommands(win, origin, t) {
+  const msgs = [
+    { source: 'aniembed', version: 1, name: 'seek', data: { time: t, currentTime: t } },
+    { source: 'aniembed', version: 1, name: 'command', data: { action: 'seek', time: t, currentTime: t } },
+    { ns: 'anipm.player', v: 1, cmd: 'seek', action: 'seek', data: { time: t, currentTime: t } },
+    { event: 'command', func: 'seek', args: [t, true] },
+    { type: 'seek', time: t, currentTime: t },
+    { command: 'seek', time: t, value: t },
+    { action: 'seek', time: t },
+    { event: 'seek', time: t, currentTime: t }
+  ];
+  msgs.forEach(m => { try { win.postMessage(m, origin); } catch (_) {} try { win.postMessage(JSON.stringify(m), origin); } catch (_) {} });
+}
+// Returns true while the report should be ignored (player hasn't reached the saved position yet).
+const fmtClock = (t) => { t = Math.max(0, Math.floor(t)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
+function resumeNote(msg) { const l = $('#nowPlaying'); if (l) l.textContent = l.textContent.replace(/ ⏱.*$/, '') + ' ⏱ ' + msg; }
+function resumeAssist(frame, origin, current, reportedTime) {
+  const r = current.resumePending;
+  if (!r || r.episode !== current.episode) return false;
+  const now = Date.now();
+  if (reportedTime >= r.at - 5) { current.resumePending = null; resumeNote('Resumed at ' + fmtClock(reportedTime)); console.info('[AniVerse] resume OK', origin, reportedTime); return false; }
+  if (now - r.started > RESUME_GIVE_UP_MS) { current.resumePending = null; resumeNote('This server ignored the resume (saved ' + fmtClock(r.at) + ')'); console.warn('[AniVerse] resume FAILED', origin, 'saved', r.at, 'player at', reportedTime); return false; }
+  if (r.tries < RESUME_MAX_TRIES && now - (r.lastTry || 0) >= RESUME_RETRY_MS) {
+    r.tries++; r.lastTry = now;
+    resumeNote('Player started at ' + fmtClock(reportedTime) + ', seeking to ' + fmtClock(r.at) + '… (try ' + r.tries + ')');
+    sendSeekCommands(frame.contentWindow, origin, r.at);
+  }
+  return true;
 }
 window.addEventListener('message', (event) => {
   if (!PLAYER_MESSAGE_ORIGINS.has(event.origin)) return;
@@ -2918,7 +3276,8 @@ window.addEventListener('message', (event) => {
       if (validTime) patch.currentTime = currentTime;
       if (validDuration) patch.duration = duration;
       if (validTime && validDuration) patch.progressPercent = Math.max(0, Math.min(100, Math.round(currentTime / duration * 100)));
-      if (Object.keys(patch).length) queuePlaybackProgress(current, patch, name === 'pause');
+      if (validTime && resumeAssist(frame, event.origin, current, currentTime)) { /* waiting for resume seek */ }
+      else if (Object.keys(patch).length) queuePlaybackProgress(current, patch, name === 'pause');
     } else if (name === 'ended') {
       queuePlaybackProgress(current, { ...(validDuration ? { currentTime: duration, duration } : (validTime ? { currentTime } : {})), progressPercent: 100, completed: true }, true);
       const label = $('#nowPlaying');
@@ -2976,7 +3335,8 @@ window.addEventListener('message', (event) => {
       const rawPercent = Number(data.percent);
       patch.progressPercent = Math.max(0, Math.min(100, Math.round(rawPercent <= 1 ? rawPercent * 100 : rawPercent)));
     }
-    if (Object.keys(patch).length) queuePlaybackProgress(current, patch);
+    if (validTime && resumeAssist(frame, event.origin, current, currentTime)) { /* waiting for resume seek */ }
+    else if (Object.keys(patch).length) queuePlaybackProgress(current, patch);
   } else if (eventName === 'complete' || eventName === 'framextv:ended' || eventName === 'ended' || data.type === 'aniembed:ended') {
     queuePlaybackProgress(current, { ...(validDuration ? { currentTime: duration, duration } : (validTime ? { currentTime } : {})), progressPercent: 100, completed: true }, true);
     const label = $('#nowPlaying');
@@ -3007,6 +3367,8 @@ function updateBottomNav() {
 function navigate(view, opts = {}) {
   const { fromRoute, keepScroll, ...rest } = opts;            // fromRoute = true when the change came from the address bar/refresh
   clearInterval(state.heroTimer);
+  if (!fromRoute) window.__aniNavd = true;   // the user has moved around inside the site (so Back can stay inside it)
+  if (view !== 'title') document.title = BASE_TITLE;
   Object.assign(state, { view, page: 1, hasNext: false, totalPages: 1, totalItems: 0 }, rest);
   updateBottomNav();
   state.startEpisode = view === 'watch' ? Math.max(1, Number(rest.startEpisode) || 1) : 1;
@@ -3015,6 +3377,7 @@ function navigate(view, opts = {}) {
   if (!fromRoute) setHash();                      // keep the address bar in sync so refresh/back/forward work
   if (!keepScroll) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   if (view === 'home') renderHome();
+  else if (view === 'title') renderTitle(state.id);
   else if (view === 'watch') renderWatch(state.id);
   else if (view === 'anikoto-watch') renderAniKotoWatch(state.id);
   else if (view === 'mylist') renderMyList();
@@ -3026,6 +3389,7 @@ function routeFromState() {
   const p = state.page > 1 ? '?p=' + state.page : '';
   if (state.view === 'mylist') return '#/mylist';
   if (state.view === 'history') return '#/history';
+  if (state.view === 'title') return '#/title/' + state.id;
   if (state.view === 'watch') return '#/watch/' + state.id;
   if (state.view === 'anikoto-watch') return '#/anikoto/' + state.id;
   if (state.view === 'search') return '#/search/' + encodeURIComponent(state.query) + p;
@@ -3040,6 +3404,7 @@ function parseRoute(routeHash = location.hash) {
   try { val = decodeURIComponent(val); } catch (_) {}
   if (a === 'mylist') return ['mylist', {}];
   if (a === 'history') return ['history', {}];
+  if (a === 'title' && val) return ['title', { id: val }];
   if (a === 'watch' && val) return ['watch', { id: val }];
   if (a === 'anikoto' && val) return ['anikoto-watch', { id: val }];
   if (a === 'search' && val) return ['search', { query: val, page }];
@@ -3078,24 +3443,12 @@ window.addEventListener('hashchange', () => {
   navigate(v, { ...o, fromRoute: true });
 });
 document.addEventListener('click', (e) => {
-  const t = e.target.closest('[data-nav],[data-watch],[data-genre],[data-view-mode],[data-page],[data-ep],[data-eprange],[data-season],[data-dot],[data-mode],[data-language],[data-server],[data-anikoto-watch],[data-ak-ep],[data-ak-language],[data-resume],[data-remove-continue],[data-clear-continue],[data-remove-history],[data-clear-history],[data-list-tab],[data-hist-view],[data-reset-filters],[data-toggle-filters],[data-toggle-genres],[data-ads-toggle]');
+  const t = e.target.closest('[data-nav],[data-watch],[data-genre],[data-view-mode],[data-page],[data-ep],[data-eprange],[data-season],[data-dot],[data-mode],[data-language],[data-server],[data-anikoto-watch],[data-ak-ep],[data-ak-language],[data-resume],[data-remove-continue],[data-clear-continue],[data-remove-history],[data-clear-history],[data-list-tab],[data-hist-view],[data-reset-filters],[data-toggle-filters],[data-toggle-genres]');
   if (!t) return;
   e.preventDefault();
-  if (t.hasAttribute('data-ads-toggle')) {
-    const wasOn = adsSandboxEnabled();
-    try { localStorage.setItem(ADS_SANDBOX_KEY, wasOn ? '0' : '1'); } catch (_) {}
-    const frame = document.querySelector('#player iframe');
-    if (frame) {
-      const src = frame.getAttribute('src');
-      if (adsSandboxEnabled()) frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock allow-pointer-lock allow-downloads');
-      else frame.removeAttribute('sandbox');
-      if (src) frame.src = src;
-    }
-    refreshAdsToggle(); return;
-  }
   if (t.hasAttribute('data-toggle-genres')) { document.querySelector('.genre-row')?.classList.toggle('open'); t.classList.toggle('open'); return; }
   if (t.hasAttribute('data-toggle-filters')) { const open = !t.classList.contains('open'); t.classList.toggle('open', open); $('#advancedFilters')?.classList.toggle('open', open); document.querySelector('.genre-row')?.classList.toggle('open', open); return; }
-  if (t.dataset.watch) return navigate('watch', { id: t.dataset.watch });
+  if (t.dataset.watch) return navigate('title', { id: t.dataset.watch });
   if (t.dataset.resume) return navigate('watch', { id: t.dataset.resume, startEpisode: Math.max(1, Number(t.dataset.resumeEp) || 1) });
   if (t.hasAttribute('data-remove-continue')) { try { localStorage.setItem(CONTINUE_KEY, JSON.stringify(getContinueWatching().filter(x => String(x.id) !== String(t.dataset.removeContinue)))); } catch (_) {} if (state.view === 'home') renderHome(); return; }
   if (t.dataset.listTab) return switchListTab(t.dataset.listTab);
@@ -3139,7 +3492,7 @@ document.addEventListener('click', (e) => {
   if (t.dataset.language) { window.currentAnime.language = t.dataset.language; return playEpisode(window.currentAnime.episode || 1); }
   if (t.dataset.mode) return playEpisode(0);
   if (t.dataset.eprange !== undefined) return buildEpRange(+t.dataset.eprange);
-  if (t.dataset.season) return navigate('watch', { id: t.dataset.season });
+  if (t.dataset.season) return navigate(state.view === 'title' ? 'title' : 'watch', { id: t.dataset.season });
   if (t.dataset.ep) return playEpisode(+t.dataset.ep);
   if (t.dataset.dot) { showSlide(+t.dataset.dot); return startHero(), showSlide(+t.dataset.dot); }
   if (t.dataset.page) { state.page += +t.dataset.page; setHash(); window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); return renderList(); }
