@@ -2010,7 +2010,7 @@ function buildEmbedSrcBase(server, { id, route, episode, language, timestamp = 0
     // Match the provider's working minimal embed behavior: do not force autoplay.
     // Keep only language and a saved resume timestamp; provider navigation controls remain inside the player.
     const params = new URLSearchParams({ lang: language === 'dub' ? 'dub' : 'sub' });
-    if (Number.isFinite(Number(timestamp)) && Number(timestamp) > 0) { const ts = String(Math.floor(Number(timestamp))); params.set('t', ts); params.set('start', ts); params.set('startAt', ts); }
+    if (Number.isFinite(Number(timestamp)) && Number(timestamp) > 0) params.set('t', String(Math.floor(Number(timestamp))));
     return `https://aniembed.se/e/${encodeURIComponent(id)}/${episode}?${params.toString()}`;
   }
   if (server === 'anipm') {
@@ -3250,7 +3250,7 @@ function resumeAssist(frame, origin, current, reportedTime) {
   if (r.tries < RESUME_MAX_TRIES && now - (r.lastTry || 0) >= RESUME_RETRY_MS) {
     r.tries++; r.lastTry = now;
     resumeNote('Player started at ' + fmtClock(reportedTime) + ', seeking to ' + fmtClock(r.at) + '… (try ' + r.tries + ')');
-    sendSeekCommands(frame.contentWindow, origin, r.at);
+    if (origin !== 'https://aniembed.se') sendSeekCommands(frame.contentWindow, origin, r.at);
   }
   return true;
 }
